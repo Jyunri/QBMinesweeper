@@ -1,0 +1,5 @@
+Duvidas
+
+1. Posso ficar usando esse @atributo da classe locamente?
+2. Posso ficar pulando linha com puts puts puts?
+3. Como usar direito esse binding pry
