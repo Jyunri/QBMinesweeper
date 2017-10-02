@@ -1,0 +1,26 @@
+Matrix class
+https://ruby-doc.org/stdlib-2.3.0/libdoc/matrix/rdoc/Matrix.html
+
+
+
+Shoes.app {
+  for i in 0..m.row+1
+    flow do
+      for j in 0..m.col+1
+        if(m.mine_field[i,j].isChecked)
+          button "#{m.mine_field[i,j]}\t" do
+            check_cell(i,j)
+          end
+        elsif(m.mine_field[i,j].isFlagged)
+          button "F\t" do
+            check_cell(i,j)
+          end
+        else
+          button "?\t" do
+            check_cell(i,j)
+          end
+        end
+      end
+    end
+  end
+}

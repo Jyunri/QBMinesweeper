@@ -2,3 +2,4 @@ Todo
 
 1. Otimizar a forma como ele expande. Ele esta reavaliando celulas que ja foram (talvez usando um array daqueles que ja foram visitados)
 2. Fazer as impressoes pelo printer
+3. Criar metodo board state
