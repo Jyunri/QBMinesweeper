@@ -8,3 +8,9 @@ Duvidas
 * Alterei o nome do metodo play para check tudo bem?
 * Posso indicar que uma celula nao tem bombas em volta com 0 inves de nada?
 * Posso clicar em uma celula que tenha uma bandeira?
+
+
+
+
+Dificuldades
+1. Linguagens e frameworks nao familiares: Javascript, sinatra, shoes

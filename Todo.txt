@@ -3,3 +3,6 @@ Todo
 1. Otimizar a forma como ele expande. Ele esta reavaliando celulas que ja foram (talvez usando um array daqueles que ja foram visitados)
 2. Fazer as impressoes pelo printer
 3. Criar metodo board state
+4. Criar formas de personalizar o campo
+5. Colocar os css em um unico arquivo
+6. Count da expansao esta errado (no sinatra ja arrumei, eh soh inverter)

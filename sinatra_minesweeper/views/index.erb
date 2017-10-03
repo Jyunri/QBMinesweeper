@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Minesweeper</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+    <style type="text/css">
+      .center{
+        text-align: center;
+      }
+      .header-cont {
+        width:100%;
+        position:fixed;
+        top:0px;
+        background:#000;
+        color: white;
+        margin: 0px;
+        font-size: 16px;
+      }
+      .body-cont{
+        margin-top: 85px;
+      }
+    </style>
+    <style>
+      .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      .button2 {background-color: #008CBA;} /* Blue */
+      .buttonFlag {background-color: #f44336;} /* Red */
+      .buttonXray {background-color: #e7e7e7; color: black;} /* Gray */ 
+      .button5 {background-color: #555555;} /* Black */
+    </style>
+    <style>
+      .field {
+        margin: auto;
+      }
+    </style>
+
+  </head>
+  <body class="body-cont">
+    <div class="header-cont center" >
+      <div><h2>Jimy QbMinesweeper</h2></div>
+    </div>
+      <table>
+        <tr><td><p>Clear Cells Left</p><textarea readonly height="1" style="align-content:center"><%= $m.clear_cell_count%></textarea><td></tr>
+      </table>
+      <table class="field" method="post" action="/click">
+      <%for i in 0..$m.row+1%>
+        <tr>
+        <%for j in 0..$m.col+1%>
+          <%next if ($m.mine_field[i,j].isBorder)%>
+          <%if($m.mine_field[i,j].isChecked)%>
+            <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "#{$m.mine_field[i,j]}\t"%></button></td>
+          <%elsif($m.mine_field[i,j].isFlagged)%>
+            <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button buttonFlag" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "F\t"%></button></td>
+          <%else%>
+            <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "?\t" %></button></td>
+          <%end%>
+        <%end%>
+        </tr>
+      <%end%>
+      </table>
+
+      <p id="log"></p>
+      <button id="xray" onclick="xray()"%>Xray button</button>
+      <button id="resetButton" onclick="resetGame()"%>Reset Game</button>
+
+
+  <script>
+    // functions to load when page load
+    window.onload = function() {
+      still_playing();
+    };
+
+    // check if game is ongoing
+    function still_playing() {
+      <%if $m.victory?%>
+        alert("You win!!");
+      <%elsif $m.game_over%>
+        alert("You lose!!");
+        resetGame();
+      <%end%>
+    }
+
+    function checkCell(element) {
+      $row = element.getAttribute("row");
+      $col = element.getAttribute("col");
+      document.getElementById("log").innerHTML = "Clicked on " + $row + $col;
+      window.location = "/check/"+$row+"/"+$col;
+    }
+
+    function flagCell(element) {
+      $row = element.getAttribute("row");
+      $col = element.getAttribute("col");
+      document.getElementById("log").innerHTML = "(Un)Set flag on " + $row + $col;
+      window.location = "/flag/"+$row+"/"+$col;
+    }
+
+    function xray() {
+      window.location = "/xray";
+    }
+
+    // prevent context-menu to open
+    document.oncontextmenu = function() {
+      return false;
+    }
+
+    function resetGame() {
+      window.location = "/";
+    }
+  </script>
+  </body>
+</html>

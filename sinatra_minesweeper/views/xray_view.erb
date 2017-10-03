@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Minesweeper</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+    <style>
+      .button {
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 5px 12px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+
+      .button2 {background-color: #008CBA;} /* Blue */
+      .buttonFlag {background-color: #f44336;} /* Red */
+      .buttonXray {background-color: #e7e7e7; color: black;} /* Gray */ 
+      .button5 {background-color: #555555;} /* Black */
+    </style>
+  </head>
+  <body class='container'>
+    <p>QB Minesweep</p>
+      <table>
+        <tr>
+          <td>
+            <p>Clear Cells Left</p>
+            <textarea readonly height="1" style="align-content:center">
+              <%= $m.clear_cell_count%>
+            </textarea>
+          <td>
+        </tr>
+      </table>
+      <table method="post" action="/click">
+        <%for i in 0..$m.row+1%>
+          <tr>
+            <%for j in 0..$m.col+1%>
+              <%next if ($m.mine_field[i,j].isBorder)%>
+                <td>
+                  <button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button buttonXray" row="<%= "#{i}"%>" col="<%= "#{j}"%>"><%= "#{$m.mine_field[i,j]}\t"%>
+                  </button>
+                </td>
+            <%end%>
+          </tr>
+        <%end%>
+      </table>
+      <button id="normalView" onclick="window.history.back()"%>Voltar</button>
+  </body>
+</html>
