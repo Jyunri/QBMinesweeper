@@ -4,39 +4,17 @@
     <meta charset='UTF-8' />
     <title>Minesweeper</title>
     <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
-    <style>
-      .button {
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          padding: 5px 12px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-      }
+    <link rel="stylesheet" type="text/css" href="/qbstyle.css"/>
 
-      .button2 {background-color: #008CBA;} /* Blue */
-      .buttonFlag {background-color: #f44336;} /* Red */
-      .buttonXray {background-color: #e7e7e7; color: black;} /* Gray */ 
-      .button5 {background-color: #555555;} /* Black */
-    </style>
   </head>
-  <body class='container'>
-    <p>QB Minesweep</p>
-      <table>
-        <tr>
-          <td>
-            <p>Clear Cells Left</p>
-            <textarea readonly height="1" style="align-content:center">
-              <%= $m.clear_cell_count%>
-            </textarea>
-          <td>
-        </tr>
+   <body class="body-cont">
+    <div class="header-cont center" >
+      <div><h2>Jimy QbMinesweeper</h2></div>
+    </div>
+      <table style="margin: auto;">
+        <tr><td><p style="text-align: center;"><b>Clear Cells Left</b></p><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea><td></tr>
       </table>
-      <table method="post" action="/click">
+      <table class="field" method="post" action="/click">
         <%for i in 0..$m.row+1%>
           <tr>
             <%for j in 0..$m.col+1%>
@@ -49,6 +27,9 @@
           </tr>
         <%end%>
       </table>
-      <button id="normalView" onclick="window.history.back()"%>Voltar</button>
+      <div style="text-align: center;margin-top: 15px">
+        <button id="normalView" onclick="window.history.back()"%>Voltar</button>
+        <button id="resetButton" onclick="resetGame()"%>Reset Game</button>
+      </div>
   </body>
 </html>

@@ -1,0 +1,43 @@
+.center{
+  text-align: center;
+}
+
+.header-cont {
+  width:100%;
+  position:fixed;
+  top:0px;
+  background:#de9e1f;
+  color: white;
+  margin: 0px;
+  font-size: 16px;
+}
+
+.body-cont{
+  margin-top: 85px;
+}
+
+.button {
+  background-color: #1D8495; /* Blue */
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.buttonChecked {background-color: #de9e1f;} /* Orange */
+.buttonFlag {background-color: #f44336;} /* Red */
+.buttonXray {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+
+#xray , #resetButton {
+  display:inline-block;
+}
+
+.field {
+  margin: auto;
+}
