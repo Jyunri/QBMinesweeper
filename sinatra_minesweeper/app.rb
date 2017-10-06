@@ -124,7 +124,7 @@ class Minesweep
     end
 
     puts
-    current_print()
+    # current_print()
 
     puts
 
@@ -174,33 +174,34 @@ class Minesweep
     return true
   end
 
-  def xray_print()
-    puts "X-ray field:"
-    for i in 0..@row+1
-      for j in 0..@col+1
-        print "#{@mine_field[i,j]}\t"
-      end
-      puts
-    end
-    puts
-  end
+# maybe i can put this out
+  # def xray_print()
+  #   puts "X-ray field:"
+  #   for i in 0..@row+1
+  #     for j in 0..@col+1
+  #       print "#{@mine_field[i,j]}\t"
+  #     end
+  #     puts
+  #   end
+  #   puts
+  # end
 
-  def current_print()
-    puts "Current state of field:"
-    for i in 0..@row+1
-      for j in 0..@col+1
-        if(@mine_field[i,j].isChecked)
-          print "#{@mine_field[i,j]}\t"
-        elsif(@mine_field[i,j].isFlagged)
-          print "F\t"
-        else
-          print "?\t"
-        end
-      end
-      puts
-    end
-    puts
-  end
+  # def current_print()
+  #   puts "Current state of field:"
+  #   for i in 0..@row+1
+  #     for j in 0..@col+1
+  #       if(@mine_field[i,j].isChecked)
+  #         print "#{@mine_field[i,j]}\t"
+  #       elsif(@mine_field[i,j].isFlagged)
+  #         print "F\t"
+  #       else
+  #         print "?\t"
+  #       end
+  #     end
+  #     puts
+  #   end
+  #   puts
+  # end
 
 end
 

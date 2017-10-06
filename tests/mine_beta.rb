@@ -2,7 +2,7 @@ require 'pry'
 require 'matrix'
 
 # Representation of a Game
-class Minesweep
+class Minesweeper
   attr_accessor :mine_field, :row, :col, :bombs_count, :clear_cell_count,
                 :game_over
 
@@ -85,16 +85,16 @@ class Minesweep
 
   def board_state(opt = {})
     field = Matrix.build(@row + 2, @col + 2) do |r, c|
-      cell_type = @mine_field[r, c].type.to_s
-      cell_status = @mine_field[r, c].status.to_s
-      cell_bomb_count =  @mine_field[r, c].bombs_in_neighborhood.to_s
-      cell_hash = { type: cell_type, status: cell_status,
-                    bombs_count: cell_bomb_count  }
+      cell_type = @mine_field[r, c].type
+      cell_status = @mine_field[r, c].status
+      cell_bomb_count = @mine_field[r, c].bombs_in_neighborhood.to_s
+
+      { type: cell_type, status: cell_status,
+        bombs_count: cell_bomb_count }
     end
 
-    state = { row_count: @row, col_count: @col, hidden: opt[:xray],
-              clear_count: @clear_cell_count, field: field }
-
+    { row_count: @row, col_count: @col, hidden: opt[:xray],
+      clear_count: @clear_cell_count, field: field }
   end
 end
 
@@ -193,57 +193,27 @@ class Cell
   end
 end
 
-# Simple printer class. Just a non-friendly representation
-class Printer
-  attr_accessor :board_state
-  def initialize(board_state)
-    @board_state = board_state
-  end
-
-  def xray_print
-    puts 'X-ray field:'
-    (0..@board_state.row + 1).each do |i|
-      (0..@board_state.col + 1).each do |j|
-        print "#{@board_state.mine_field[i, j]}\t"
-      end
-      puts
-    end
-    puts
-  end
-
-  def current_print
-    puts 'Current state of field:'
-    (0..@board_state.row + 1).each do |i|
-      (0..@board_state.col + 1).each do |j|
-        if @board_state.mine_field[i, j].checked?
-          print "#{@board_state.mine_field[i, j]}\t"
-        elsif @board_state.mine_field[i, j].flagged?
-          print "F\t"
-        else
-          print "?\t"
-        end
-      end
-      puts
-    end
-    puts
-  end
-end
-
-# Simple printer class. Just a non-friendly representation
+# Simple printer class. Uses Matrix and Hashes representation from board_state,
+# hence it can be used to print the board without knowing the custom classes
 class SimplePrinter
   attr_accessor :board_state
-  def initialize(board_state)
-    @board_state = board_state
+
+  def cell_type_print(cell)
+    cell_type = cell[:type]
+    if cell_type.zero?
+      cell[:bombs_count].to_s
+    elsif cell_type == 1
+      '#'
+    end
   end
 
-  def cell_print(cell)
-    cell_type  = cell[:type]
-    if cell_type == "-1"
-      'x'
-    elsif cell_type == "1"
-      '#'
-    else
-      cell[:bombs_count].to_s
+  def cell_status_print(cell)
+    if cell[:status] == 1
+      cell_type_print(cell).to_s
+    elsif cell[:status].zero?
+      '?'
+    elsif cell[:status] == 2
+      'F'
     end
   end
 
@@ -251,31 +221,101 @@ class SimplePrinter
     puts 'X-ray field:'
     (0..@board_state[:row_count] + 1).each do |i|
       (0..@board_state[:col_count] + 1).each do |j|
-        # cell_status = "#{@board_state[:field][i, j][:status]}"
-        cell  = @board_state[:field][i, j]
-        print "#{cell_print(cell)}\t"
+        cell = @board_state[:field][i, j]
+        print "#{cell_type_print(cell)}\t"
       end
       puts
     end
   end
 
-  def current_status_print
-    puts "Current print:"
+  def current_state_print
+    puts 'Current print:'
+    (0..@board_state[:row_count] + 1).each do |i|
+      (0..@board_state[:col_count] + 1).each do |j|
+        cell = @board_state[:field][i, j]
+        print "#{cell_status_print(cell)}\t"
+      end
+      puts
+    end
   end
 
-  def print_state
-    row_count = @board_state[:row_count]
-    col_count = @board_state[:col_count]
+  def print_state(board_state)
+    @board_state = board_state
     hidden = @board_state[:hidden]
 
-    if(hidden)
+    if hidden
       xray_print
     else
-      current_status_print
+      current_state_print
     end
 
     puts
   end
+end
+
+# Simple printer class. Uses Matrix and Hashes representation from board_state,
+# hence it can be used to print the board without knowing the custom classes
+class PrettyPrinter
+  attr_accessor :board_state
+
+  def cell_type_print(cell)
+    cell_type = cell[:type]
+    if cell_type == 1
+      cell[:bombs_count].to_s
+    elsif cell_type.zero?
+      '#'
+    end
+  end
+
+  def cell_status_print(cell)
+    if cell[:status].zero?
+      '?'
+    elsif cell[:status] == 2
+      'F'
+    end
+  end
+
+  def xray_print
+    puts 'X-ray field:'
+    (0..@board_state[:row_count] + 1).each do |i|
+      (0..@board_state[:col_count] + 1).each do |j|
+        cell = @board_state[:field][i, j]
+        print "#{cell_type_print(cell)}\t"
+      end
+      puts
+    end
+  end
+
+  def current_state_print
+    puts 'Current print:'
+    (0..@board_state[:row_count] + 1).each do |i|
+      (0..@board_state[:col_count] + 1).each do |j|
+        cell = @board_state[:field][i, j]
+        print "#{cell_status_print(cell)}\t"
+      end
+      puts
+    end
+  end
+
+  def print_state(board_state)
+    @board_state = board_state
+    hidden = @board_state[:hidden]
+
+    if hidden
+      xray_print
+    else
+      current_state_print
+    end
+
+    puts
+  end
+end
+
+# Methods to handle IO data
+def input_validation(input = {})
+  raise ArgumentError, 'Row is less than 0' unless input[:rows] > 0
+  raise ArgumentError, 'Column is less than 0' unless input[:cols] > 0
+  raise ArgumentError, 'Bombs is less than 0' unless input[:bombs] > 0
 end
 
 def new_game_input
@@ -286,16 +326,14 @@ def new_game_input
   puts 'Enter with number of bombs'
   input_bombs = gets.to_i
 
-  raise ArgumentError, 'Row is less than 0' unless input_rows > 0
-  raise ArgumentError, 'Column is less than 0' unless input_columns > 0
-  raise ArgumentError, 'Bombs is less than 0' unless input_bombs > 0
+  input_validation(rows: input_rows, cols: input_columns, bombs: input_bombs)
 
-  Minesweep.new(input_rows, input_columns, input_bombs)
+  Minesweeper.new(input_rows, input_columns, input_bombs)
 end
 
 g = new_game_input
-
-Printer.new(g).current_print
+printer = SimplePrinter.new
+printer.print_state(g.board_state)
 
 loop do
   menu = "Menu:\
@@ -310,18 +348,15 @@ loop do
   case print_mode
   when 'c'
     g.game_check_cell
-    puts
-    Printer.new(g).current_print
+    puts printer.print_state(g.board_state)
   when 'f'
     g.game_set_flag
-    puts
-    Printer.new(g).current_print
+    puts printer.print_state(g.board_state)
   when 'x'
-    SimplePrinter.new(g.board_state(xray:true)).print_state
+    puts printer.print_state(g.board_state(xray: true))
   when 'p'
-    Printer.new(g).current_print
+    puts printer.print_state(g.board_state)
   end
-  puts
   break if print_mode == 'e' || !g.still_playing?
 end
 
@@ -333,7 +368,5 @@ if g.victory?
 else
   puts 'You Lose!'
 end
-puts
-Printer.new(g).xray_print()
 
-g.board_state
+puts printer.print_state(g.board_state(xray: true))

@@ -5,12 +5,15 @@ Duvidas
 3. Como usar direito esse binding pry
 4. Posso utilizar um framework para fazer uma UI?
 
-* Alterei o nome do metodo play para check tudo bem?
+* Alterei o nome dos seguintes metodos:
+	play -> game_check_cell
+	flag -> game_set_flag
+	Printer.print -> Printer.print_state
 * Posso indicar que uma celula nao tem bombas em volta com 0 inves de nada?
-* Posso clicar em uma celula que tenha uma bandeira?
 
 
 
 
 Dificuldades
 1. Linguagens e frameworks nao familiares: Javascript, sinatra, shoes
+2. Manter as boas praticas com a ajuda do rubocop
