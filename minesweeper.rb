@@ -84,7 +84,17 @@ class Minesweep
   end
 
   def board_state(opt = {})
-    puts opt[:xray]
+    field = Matrix.build(@row + 2, @col + 2) do |r, c|
+      cell_type = @mine_field[r, c].type.to_s
+      cell_status = @mine_field[r, c].status.to_s
+      cell_bomb_count =  @mine_field[r, c].bombs_in_neighborhood.to_s
+      cell_hash = { type: cell_type, status: cell_status,
+                    bombs_count: cell_bomb_count  }
+    end
+
+    state = { row_count: @row, col_count: @col, hidden: opt[:xray],
+              clear_count: @clear_cell_count, field: field }
+
   end
 end
 
@@ -219,6 +229,55 @@ class Printer
   end
 end
 
+# Simple printer class. Just a non-friendly representation
+class SimplePrinter
+  attr_accessor :board_state
+  def initialize(board_state)
+    @board_state = board_state
+  end
+
+  def cell_print(cell)
+    cell_type  = cell[:type]
+    if cell_type == "-1"
+      'x'
+    elsif cell_type == "1"
+      '#'
+    else
+      cell[:bombs_count].to_s
+    end
+  end
+
+  def xray_print
+    puts 'X-ray field:'
+    (0..@board_state[:row_count] + 1).each do |i|
+      (0..@board_state[:col_count] + 1).each do |j|
+        # cell_status = "#{@board_state[:field][i, j][:status]}"
+        cell  = @board_state[:field][i, j]
+        print "#{cell_print(cell)}\t"
+      end
+      puts
+    end
+  end
+
+  def current_status_print
+    puts "Current print:"
+  end
+
+  def print_state
+    row_count = @board_state[:row_count]
+    col_count = @board_state[:col_count]
+    hidden = @board_state[:hidden]
+
+    if(hidden)
+      xray_print
+    else
+      current_status_print
+    end
+
+    puts
+  end
+end
+
 def new_game_input
   puts 'Enter with number of rows'
   input_rows = gets.to_i
@@ -258,7 +317,7 @@ loop do
     puts
     Printer.new(g).current_print
   when 'x'
-    Printer.new(g).xray_print
+    SimplePrinter.new(g.board_state(xray:true)).print_state
   when 'p'
     Printer.new(g).current_print
   end
@@ -275,4 +334,6 @@ else
   puts 'You Lose!'
 end
 puts
-Printer.new(g).xray_print
+Printer.new(g).xray_print()
+
+g.board_state
