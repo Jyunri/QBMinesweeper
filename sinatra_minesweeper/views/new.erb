@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Minesweeper</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href="/qbstyle.css"/>
+
+  </head>
+   <body class="body-cont">
+    <div class="header-cont center" >
+      <div><h2>Jimy QbMinesweeper</h2></div>
+    </div>
+
+    <div class="settings">
+      <form id=new_form" action="/new" method="post" >
+        <table border-spacing: 10px>
+          <tr>
+            <td> <label>Rows</label> </td>
+            <td> <input type="text" name="row_count" placeholder="Set the number of rows"> </td>
+          </tr>
+          <tr>
+            <td><label>Columns</label></td>
+            <td><input type="text" name="col_count" placeholder="Set the number of columns"></td>
+          </tr>
+          <tr>
+            <td><label>Bombs</label></td>
+            <td><input type="text" name="bomb_count" placeholder="Set the number of bombs"></td>
+          </tr>
+        </table>
+        <input style="margin:auto" class="button" type="submit" value="OK!">
+      </form>
+
+
+
+    </div>
+  </body>
+</html>

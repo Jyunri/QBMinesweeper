@@ -34,6 +34,9 @@
 .buttonXray {background-color: #e7e7e7; color: black;} /* Gray */ 
 .button5 {background-color: #555555;} /* Black */
 
+.settings {
+  text-align: center;
+}
 #xray , #resetButton {
   display:inline-block;
 }

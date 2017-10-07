@@ -18,10 +18,10 @@
       <%for i in 0..$m.row+1%>
         <tr>
         <%for j in 0..$m.col+1%>
-          <%next if ($m.mine_field[i,j].isBorder)%>
-          <%if($m.mine_field[i,j].isChecked)%>
+          <%next if ($m.mine_field[i,j].border?)%>
+          <%if($m.mine_field[i,j].checked?)%>
             <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button buttonChecked" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "#{$m.mine_field[i,j]}\t"%></button></td>
-          <%elsif($m.mine_field[i,j].isFlagged)%>
+          <%elsif($m.mine_field[i,j].flagged?)%>
             <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button buttonFlag" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "F\t"%></button></td>
           <%else%>
             <td><button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button" row="<%= "#{i}"%>" col="<%= "#{j}"%>" onclick="checkCell(this)" oncontextmenu="flagCell(this)"><%= "?\t" %></button></td>

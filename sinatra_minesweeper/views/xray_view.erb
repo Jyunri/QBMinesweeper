@@ -18,7 +18,7 @@
         <%for i in 0..$m.row+1%>
           <tr>
             <%for j in 0..$m.col+1%>
-              <%next if ($m.mine_field[i,j].isBorder)%>
+              <%next if ($m.mine_field[i,j].border?)%>
                 <td>
                   <button id="<%= "cell#{i}"%><%= "#{j}"%>" class="button buttonXray" row="<%= "#{i}"%>" col="<%= "#{j}"%>"><%= "#{$m.mine_field[i,j]}\t"%>
                   </button>
