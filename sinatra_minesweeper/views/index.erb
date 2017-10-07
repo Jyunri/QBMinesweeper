@@ -4,8 +4,8 @@
     <meta charset='UTF-8' />
     <title>Minesweeper</title>
     <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
-    <link rel="stylesheet" type="text/css" href="/qbstyle.css"/>
-
+    <link rel="stylesheet" type="text/css" href="/minestyle.css"/>
+    <script src="/minescript.js" type="text/javascript"></script>
   </head>
   <body class="body-cont">
     <div class="header-cont center" >
@@ -36,49 +36,22 @@
         <button id="xray" onclick="xray()"%>Xray View</button>
         <button id="resetButton" onclick="resetGame()"%>Reset Game</button>
       </div>
-
-  <script>
-    // functions to load when page load
-    window.onload = function() {
-      still_playing();
-    };
-
-    // check if game is ongoing
-    function still_playing() {
-      <%if $m.victory?%>
-        alert("You win!!");
-      <%elsif $m.game_over%>
-        alert("You lose!!");
-        resetGame();
-      <%end%>
-    }
-
-    function checkCell(element) {
-      $row = element.getAttribute("row");
-      $col = element.getAttribute("col");
-      document.getElementById("log").innerHTML = "Clicked on " + $row + $col;
-      window.location = "/check/"+$row+"/"+$col;
-    }
-
-    function flagCell(element) {
-      $row = element.getAttribute("row");
-      $col = element.getAttribute("col");
-      document.getElementById("log").innerHTML = "(Un)Set flag on " + $row + $col;
-      window.location = "/flag/"+$row+"/"+$col;
-    }
-
-    function xray() {
-      window.location = "/xray";
-    }
-
-    // prevent context-menu to open
-    document.oncontextmenu = function() {
-      return false;
-    }
-
-    function resetGame() {
-      window.location = "/";
-    }
-  </script>
   </body>
 </html>
+
+<script>
+// functions to load when page load
+  window.onload = function() {
+    still_playing();
+  };
+
+  // check if game is ongoing
+  function still_playing() {
+    <%if $m.victory?%>
+      alert("You win!!");
+    <%elsif $m.game_over%>
+      alert("You lose!!");
+      xray();
+    <%end%>
+  }
+</script>

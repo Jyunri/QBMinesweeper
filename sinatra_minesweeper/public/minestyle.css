@@ -44,3 +44,12 @@
 .field {
   margin: auto;
 }
+
+.settings_table {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
+#flash_alert {
+  text-align: center;
+}
