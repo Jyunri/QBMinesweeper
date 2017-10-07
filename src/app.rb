@@ -5,7 +5,7 @@ require 'pry'
 include IOHandler
 
 g = IOHandler.new_game_input
-printer = SimplePrinter.new
+printer = PrettyPrinter.new
 printer.print_state(g.board_state)
 
 loop do

@@ -1,21 +1,27 @@
-# Parse string status and type to visual representation
+require 'colorize'
+
+# Parse string status and type to visual representation.
+# print_mode can be 0 (simple) or 1 (pretty)
 module CellToString
-  def cell_type_print(cell)
+  def cell_type_print(cell, print_mode)
+    bomb_cell = ['#', "\u{1F4A3}"]
     cell_type = cell[:type]
     if cell_type.zero?
       cell[:bombs_count].to_s
     elsif cell_type == 1
-      '#'
+      bomb_cell[print_mode]
     end
   end
 
-  def cell_status_print(cell)
+  def cell_status_print(cell, print_mode)
+    flag_cell = ['F', "\u{1F3F3}".bold.colorize(:red)]
+    clear_cell = ['?', "\u{1F381}".bold.colorize(:yellow)]
     if cell[:status] == 1
-      cell_type_print(cell).to_s
+      cell_type_print(cell, print_mode).to_s
     elsif cell[:status].zero?
-      '?'
+      clear_cell[print_mode]
     elsif cell[:status] == 2
-      'F'
+      flag_cell[print_mode]
     end
   end
 end
@@ -31,7 +37,7 @@ class SimplePrinter
     (0..@board_state[:row_count] + 1).each do |i|
       (0..@board_state[:col_count] + 1).each do |j|
         cell = @board_state[:field][i, j]
-        print "#{cell_type_print(cell)}\t"
+        print "#{cell_type_print(cell, 0)}\t"
       end
       puts
     end
@@ -42,7 +48,7 @@ class SimplePrinter
     (0..@board_state[:row_count] + 1).each do |i|
       (0..@board_state[:col_count] + 1).each do |j|
         cell = @board_state[:field][i, j]
-        print "#{cell_status_print(cell)}\t"
+        print "#{cell_status_print(cell, 0)}\t"
       end
       puts
     end
@@ -73,7 +79,7 @@ class PrettyPrinter
     (0..@board_state[:row_count] + 1).each do |i|
       (0..@board_state[:col_count] + 1).each do |j|
         cell = @board_state[:field][i, j]
-        print "#{cell_type_print(cell)}\t"
+        print "#{cell_type_print(cell, 1)}\t"
       end
       puts
     end
@@ -84,7 +90,7 @@ class PrettyPrinter
     (0..@board_state[:row_count] + 1).each do |i|
       (0..@board_state[:col_count] + 1).each do |j|
         cell = @board_state[:field][i, j]
-        print "#{cell_status_print(cell)}\t"
+        print "#{cell_status_print(cell, 1)}\t"
       end
       puts
     end

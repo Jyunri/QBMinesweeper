@@ -20,8 +20,8 @@ class Cell
     elsif unchecked?
       @status = 1
       game.clear_cell_count -= 1
-      puts "Nice! There's still #{game.clear_cell_count} clear cells left!"
       expand_neighborhood(game) if bombs_in_neighborhood.zero?
+      puts "Nice! There's still #{game.clear_cell_count} clear cells left!"
     else
       puts 'Invalid position!'
     end
