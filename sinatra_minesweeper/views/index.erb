@@ -14,13 +14,18 @@
       <table class="header_table" style="margin: auto;">
         <tr>
           <td><label style="text-align: center;"><b>Clear Cells Left</b></label></td>
-          <td><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea></td>
+          <td><img id="clearcell1" class="score" alt="">
+          <img id="clearcell2" class="score" alt="">
+          <img id="clearcell3" class="score" alt=""></td>
         </tr>
         <tr>
           <td><label style="text-align: center;"><b>Flags Left</b></label></td>
-          <td><textarea readonly height="3" style="align-content:center;"><%= $m.flag_count%></textarea></td>
+          <td><img id="flags1" class="score" alt="">
+          <img id="flags2" class="score" alt="">
+          <img id="flags3" class="score" alt=""></td>
         </tr>
       </table>
+
 
       <table class="field" method="post" action="/click">
       <%for i in 0..$m.row+1%>
@@ -46,7 +51,7 @@
       </div>
 
       <div style="text-align: center;margin-top: 15px">
-        <button id="resetButton" onclick="quickReset(<%= $m.row%>, <%= $m.col%>, <%=$m.bombs_count%>)">Reset Game</button>
+        <button id="resetButton" onclick="quickReset()">Reset Game</button>
       </div>
   </body>
 </html>
@@ -55,6 +60,7 @@
 // functions to load when page load
   window.onload = function() {
     still_playing();
+    score_header();
   };
 
   // check if game is ongoing
@@ -65,5 +71,18 @@
       alert("You lose!!");
       xray();
     <%end%>
+  }
+
+  function score_header() {
+    <% clearcell = $m.clear_cell_count.to_s.chars.map(&:to_i)%>
+    <% flagcount = $m.flag_count.to_s.chars.map(&:to_i)%>
+
+    document.getElementById("clearcell1").src = scoreboard(<%=clearcell[0]%>);
+    document.getElementById("clearcell2").src = scoreboard(<%=clearcell[1]%>);
+    document.getElementById("clearcell3").src = scoreboard(<%=clearcell[2]%>);
+
+    document.getElementById("flags1").src = scoreboard(<%=flagcount[0]%>);
+    document.getElementById("flags2").src = scoreboard(<%=flagcount[1]%>);
+    document.getElementById("flags3").src = scoreboard(<%=flagcount[2]%>);
   }
 </script>

@@ -40,14 +40,13 @@ post '/new' do
   end
 end
 
-get '/reset/:row/:col/:bombs' do
-  row = params['row'].to_i
-  col = params['col'].to_i
-  bombs = params['bombs'].to_i
+get '/reset' do
+  row = $m.row
+  col = $m.col
+  bombs = $m.bombs_count
   $m = Minesweeper.new(row, col, bombs)
   erb :index
 end
-
 
 get '/check/:row/:col' do
   row = params['row'].to_i

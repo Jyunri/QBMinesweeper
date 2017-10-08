@@ -59,3 +59,5 @@ else
 end
 
 ###
+
+<td><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea></td>

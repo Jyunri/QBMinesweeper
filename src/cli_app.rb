@@ -8,7 +8,6 @@ g = IOHandler.new_game_input
 print_style = 1
 printer = SimplePrinter.new
 printer.print_state(g.board_state)
-
 loop do
   menu = "Menu:\
     \nc: Check cell\

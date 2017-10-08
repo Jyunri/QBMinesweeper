@@ -25,9 +25,23 @@ function settings() {
   window.location = "/";
 }
 
-function quickReset(row, col, bombs) {
-  $row = row;
-  $col = col;
-  $bombs = bombs;
-  window.location = "/reset/"+$row+"/"+$col+"/"+$bombs;
+function quickReset() {
+  window.location = "/reset";
+}
+
+function scoreboard(score) {
+  var digits = {
+    '0': '/0.png',
+    '1': '/1.png',
+    '2': '/2.png',
+    '3': '/3.png',
+    '4': '/4.png',
+    '5': '/5.png',
+    '6': '/6.png',
+    '7': '/7.png',
+    '8': '/8.png',
+    '9': '/9.png',
+  };
+
+  return digits[score];
 }
