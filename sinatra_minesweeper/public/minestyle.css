@@ -45,7 +45,7 @@
   margin: auto;
 }
 
-.settings_table {
+.settings_table, .header_table {
   border-collapse: separate;
   border-spacing: 10px;
 }
