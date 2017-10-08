@@ -12,7 +12,14 @@
       <div><h2>Jimy QbMinesweeper</h2></div>
     </div>
       <table style="margin: auto;">
-        <tr><td><p style="text-align: center;"><b>Clear Cells Left</b></p><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea><td></tr>
+        <tr>
+          <td><label style="text-align: center;"><b>Clear Cells Left</b></label></td>
+          <td><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea></td>
+        </tr>
+        <tr>
+          <td><label style="text-align: center;"><b>Flags Left</b></label></td>
+          <td><textarea readonly height="3" style="align-content:center;"><%= $m.flag_count%></textarea></td>
+        </tr>
       </table>
       <table class="field" method="post" action="/click">
         <%for i in 0..$m.row+1%>
@@ -29,7 +36,11 @@
       </table>
       <div style="text-align: center;margin-top: 15px">
         <button id="normalView" onclick="window.history.back()"%>Voltar</button>
-        <button id="resetButton" onclick="resetGame()"%>Reset Game</button>
+        <button id="resetButton" onclick="settings()"%>Settings</button>
+      </div>
+
+      <div style="text-align: center;margin-top: 15px">
+        <button id="resetButton" onclick="quickReset(<%= $m.row%>, <%= $m.col%>, <%=$m.bombs_count%>)">Reset Game</button>
       </div>
   </body>
 </html>

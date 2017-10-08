@@ -24,3 +24,10 @@ Shoes.app {
     end
   end
 }
+
+
+
+form  { display: table; margin-left: auto; margin-right: auto; border-spacing: 10px; }
+p     { display: table-row; text-align: center }
+label { display: table-cell; }
+input { display: table-cell; }

@@ -32,10 +32,11 @@ class Cell
       (col - 1..col + 1).each do |c|
         next if r == row && c == col
         cell = game.mine_field[r, c]
-        next if cell.checked?
-        cell.status = 1
-        game.clear_cell_count -= 1
-        cell.expand_neighborhood(game) if cell.expandable?
+        if cell.unchecked?
+          cell.status = 1
+          game.clear_cell_count -= 1
+          cell.expand_neighborhood(game) if cell.expandable?
+        end
       end
     end
   end

@@ -32,21 +32,24 @@ class Cell
       (col - 1..col + 1).each do |c|
         next if r == row && c == col
         cell = game.mine_field[r, c]
-        next if cell.checked?
-        cell.status = 1
-        game.clear_cell_count -= 1
-        cell.expand_neighborhood(game) if cell.expandable?
+        if cell.unchecked?
+          cell.status = 1
+          game.clear_cell_count -= 1
+          cell.expand_neighborhood(game) if cell.expandable?
+        end
       end
     end
   end
 
-  def set_flag
+  def set_flag(game)
     if flagged?
       @status = 0
       puts "Flag unset from position (#{@row},#{@col})"
+      game.flag_count += 1
     elsif unchecked?
       @status = 2
       puts "Flag set on position (#{@row},#{@col})"
+      game.flag_count -= 1
     else
       puts 'Invalid position!'
       false

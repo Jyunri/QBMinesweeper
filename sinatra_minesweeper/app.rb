@@ -40,6 +40,15 @@ post '/new' do
   end
 end
 
+get '/reset/:row/:col/:bombs' do
+  row = params['row'].to_i
+  col = params['col'].to_i
+  bombs = params['bombs'].to_i
+  $m = Minesweeper.new(row, col, bombs)
+  erb :index
+end
+
+
 get '/check/:row/:col' do
   row = params['row'].to_i
   col = params['col'].to_i
@@ -50,9 +59,8 @@ end
 get '/flag/:row/:col' do
   row = params['row'].to_i
   col = params['col'].to_i
-  $m.mine_field[row, col].set_flag
+  $m.mine_field[row, col].set_flag($m)
   erb :index
-  # redirect '/'
 end
 
 get '/xray' do

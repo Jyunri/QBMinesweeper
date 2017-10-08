@@ -4,12 +4,13 @@ require './cell.rb'
 # Representation of a Game
 class Minesweeper
   attr_accessor :mine_field, :row, :col, :bombs_count, :clear_cell_count,
-                :game_over
+                :flag_count, :game_over
 
   def initialize(row, col, bombs_count)
     @row = row
     @col = col
     @bombs_count = bombs_count
+    @flag_count = bombs_count
     @clear_cell_count = @row * @col - @bombs_count
     @game_over = false
     @mine_field = generate_field
@@ -17,10 +18,11 @@ class Minesweeper
   end
 
   def generate_field
-    borders = [0, row + 1, col + 1]
+    row_borders = [0, row + 1]
+    col_borders = [0, col + 1]
     Matrix.build(row + 2, col + 2) do |r, c|
       # check if is a border cell
-      if borders.include?(r) || borders.include?(c)
+      if row_borders.include?(r) || col_borders.include?(c)
         Cell.new(r, c, -1, 1)
       else
         Cell.new(r, c, 0, 0)
@@ -81,6 +83,7 @@ class Minesweeper
 
     # TODO: - raise as exception if invalid row/column
     @mine_field[input_row, input_col].set_flag
+    @flag_count -= 1
   end
 
   def board_state(opt = {})

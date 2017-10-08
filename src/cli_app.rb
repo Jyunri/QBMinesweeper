@@ -5,14 +5,15 @@ require 'pry'
 include IOHandler
 
 g = IOHandler.new_game_input
-printer = PrettyPrinter.new
+print_style = 1
+printer = SimplePrinter.new
 printer.print_state(g.board_state)
 
 loop do
   menu = "Menu:\
     \nc: Check cell\
     \nf: Set/Unset flag\
-    \np: Print current state of field\
+    \np: Change print style\
     \nx: Print x-ray field\
     \ne: Exit programn\n"
   puts menu
@@ -28,7 +29,13 @@ loop do
   when 'x'
     puts printer.print_state(g.board_state(xray: true))
   when 'p'
-    puts printer.print_state(g.board_state)
+    if print_style == 1
+      printer = PrettyPrinter.new
+      print_style = 2
+    else
+      printer = SimplePrinter.new
+      print_style = 1
+    end
   end
   break if print_mode == 'e' || !g.still_playing?
 end
