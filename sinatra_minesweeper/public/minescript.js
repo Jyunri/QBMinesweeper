@@ -29,6 +29,11 @@ function quickReset() {
   window.location = "/reset";
 }
 
+function saveGame() {
+  alert("Game Saved!")
+  window.location = "/save";
+}
+
 function scoreboard(score) {
   var digits = {
     '0': '/0.png',

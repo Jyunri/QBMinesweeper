@@ -5,7 +5,7 @@ require 'pry'
 # Representation of a Game
 class Minesweeper
   attr_accessor :mine_field, :row, :col, :bombs_count, :clear_cell_count,
-                :flag_count,:game_over
+                :flag_count, :game_over
 
   def initialize(row, col, bombs_count)
     @row = row

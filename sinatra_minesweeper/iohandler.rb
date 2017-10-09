@@ -1,4 +1,5 @@
 require './minesweeper.rb'
+require 'json'
 
 # Module to handle IO data
 module IOHandler
@@ -19,5 +20,16 @@ module IOHandler
     input_validation(rows: input_rows, cols: input_columns, bombs: input_bombs)
 
     Minesweeper.new(input_rows, input_columns, input_bombs)
+  end
+
+  def save_game(board_state)
+    File.open('savefile.json', 'w') do |f|
+      f.write(JSON.pretty_generate(board_state, indent: "\t"))
+    end
+  end
+
+  def load_game
+    file = File.read('savefile.json')
+    board_state = JSON.parse(file)
   end
 end

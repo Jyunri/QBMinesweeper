@@ -61,3 +61,19 @@ end
 ###
 
 <td><textarea readonly height="3" style="align-content:center;"><%= $m.clear_cell_count%></textarea></td>
+
+###
+
+def board_state(opt = {})
+    field = Matrix.build(@row + 2, @col + 2) do |r, c|
+      cell_type = @mine_field[r, c].type
+      cell_status = @mine_field[r, c].status
+      cell_bomb_count = @mine_field[r, c].bombs_in_neighborhood.to_s
+
+      { type: cell_type, status: cell_status,
+        bombs_count: cell_bomb_count }
+    end
+
+    { row_count: @row, col_count: @col, hidden: opt[:xray],
+      clear_count: @clear_cell_count, field: field }
+  end

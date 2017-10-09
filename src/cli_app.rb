@@ -9,24 +9,20 @@ print_style = 1
 printer = SimplePrinter.new
 printer.print_state(g.board_state)
 loop do
-  menu = "Menu:\
-    \nc: Check cell\
-    \nf: Set/Unset flag\
-    \np: Change print style\
-    \nx: Print x-ray field\
-    \ne: Exit programn\n"
-  puts menu
-  print_mode = gets.chomp
-  puts
+  IOHandler.menu
+  puts print_mode = gets.chomp
   case print_mode
   when 'c'
     g.game_check_cell
-    puts printer.print_state(g.board_state)
   when 'f'
     g.game_set_flag
     puts printer.print_state(g.board_state)
   when 'x'
     puts printer.print_state(g.board_state(xray: true))
+  when 's'
+    IOHandler.save_game(g.board_state)
+  when 'l'
+    IOHandler.load_game
   when 'p'
     if print_style == 1
       printer = PrettyPrinter.new

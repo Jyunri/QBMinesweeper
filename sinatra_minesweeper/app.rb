@@ -65,3 +65,8 @@ end
 get '/xray' do
   erb :xray_view
 end
+
+get '/save' do
+  IOHandler.save_game($m.board_state)
+  erb :index
+end
