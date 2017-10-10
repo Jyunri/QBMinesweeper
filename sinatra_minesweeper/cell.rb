@@ -6,11 +6,11 @@ require 'matrix'
 class Cell
   attr_accessor :row, :col, :type, :status, :hasFlag, :bombs_in_neighborhood
 
-  def initialize(row, col, type, status)
+  def initialize(row, col, type, status, bombs_in_neighborhood = 0)
     @row = row
     @col = col
     @type = type
-    @bombs_in_neighborhood = 0
+    @bombs_in_neighborhood = bombs_in_neighborhood
     @status = status
   end
 
@@ -32,11 +32,10 @@ class Cell
       (col - 1..col + 1).each do |c|
         next if r == row && c == col
         cell = game.mine_field[r, c]
-        if cell.unchecked?
-          cell.status = 1
-          game.clear_cell_count -= 1
-          cell.expand_neighborhood(game) if cell.expandable?
-        end
+        next unless cell.unchecked?
+        cell.status = 1
+        game.clear_cell_count -= 1
+        cell.expand_neighborhood(game) if cell.expandable?
       end
     end
   end

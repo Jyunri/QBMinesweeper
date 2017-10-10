@@ -1,5 +1,6 @@
 require 'matrix'
 require './cell.rb'
+require 'pry'
 
 # Representation of a Game
 class Minesweeper
@@ -97,6 +98,18 @@ class Minesweeper
     end
 
     { row_count: @row, col_count: @col, hidden: opt[:xray],
-      clear_count: @clear_cell_count, field: field }
+      clear_count: @clear_cell_count, flag_count: @flag_count,
+      field: field }
+  end
+
+  # alternative representation to serialize field without using Matrix Class
+  def board_state2(opt = {})
+    field = ''
+    @mine_field.each do |e|
+      field += "#{e}#{e.status},"
+    end
+    { row_count: @row, col_count: @col, hidden: opt[:xray],
+      clear_count: @clear_cell_count, flag_count: @flag_count,
+      field: field }
   end
 end

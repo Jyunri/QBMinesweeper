@@ -1,9 +1,12 @@
 require 'matrix'
 require './cell.rb'
 require 'pry'
+require './iohandler.rb'
 
 # Representation of a Game
 class Minesweeper
+  include IOHandler
+
   attr_accessor :mine_field, :row, :col, :bombs_count, :clear_cell_count,
                 :flag_count, :game_over
 
@@ -71,9 +74,12 @@ class Minesweeper
     input_col = gets.to_i
 
     # Passing the game class as parameter to handle neighbor cells
-    @mine_field[input_row, input_col].check_cell(self)
-
-    true
+    if IOHandler.position_input_validation(input_row, input_col, @row, @col)
+      @mine_field[input_row, input_col].check_cell(self)
+    else
+      puts 'Invalid position!'
+      return false
+    end
   end
 
   def game_set_flag
@@ -98,7 +104,8 @@ class Minesweeper
     end
 
     { row_count: @row, col_count: @col, hidden: opt[:xray],
-      clear_count: @clear_cell_count, field: field }
+      clear_count: @clear_cell_count, flag_count: @flag_count,
+      field: field }
   end
 
   # alternative representation to serialize field without using Matrix Class
@@ -108,6 +115,7 @@ class Minesweeper
       field += "#{e}#{e.status},"
     end
     { row_count: @row, col_count: @col, hidden: opt[:xray],
-      clear_count: @clear_cell_count, field: field }
+      clear_count: @clear_cell_count, flag_count: @flag_count,
+      field: field }
   end
 end

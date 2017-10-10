@@ -23,6 +23,10 @@ module IOHandler
     raise ArgumentError, 'Bombs is less than 0' unless input[:bombs] > 0
   end
 
+  def position_input_validation(row, col, max_row, max_col)
+    return false if row < 1 || row > max_row || col < 1 || col > max_col
+  end
+
   def new_game_input
     puts 'Enter with number of rows'
     input_rows = gets.to_i
@@ -48,6 +52,7 @@ module IOHandler
     game.row = board_state['row_count']
     game.col = board_state['col_count']
     game.clear_cell_count = board_state['clear_count']
+    game.flag_count = board_state['flag_count']
     game.bombs_count = (game.row * game.col) - game.clear_cell_count
 
     field = board_state['field'].tr('#', 'b')

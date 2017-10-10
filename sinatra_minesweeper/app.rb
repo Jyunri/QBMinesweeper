@@ -4,7 +4,6 @@ require 'sinatra/flash'
 enable :sessions
 
 require './iohandler.rb'
-require './printers.rb'
 require './minesweeper.rb'
 require 'pry'
 
@@ -67,6 +66,11 @@ get '/xray' do
 end
 
 get '/save' do
-  IOHandler.save_game($m.board_state)
+  IOHandler.save_game($m.board_state2)
+  erb :index
+end
+
+get '/load' do
+  IOHandler.load_game($m,'public/savefile.json')
   erb :index
 end

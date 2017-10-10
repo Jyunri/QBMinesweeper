@@ -34,6 +34,11 @@ function saveGame() {
   window.location = "/save";
 }
 
+function loadGame() {
+  alert("Game Loaded!")
+  window.location = "/load";
+}
+
 function scoreboard(score) {
   var digits = {
     '0': '/0.png',
