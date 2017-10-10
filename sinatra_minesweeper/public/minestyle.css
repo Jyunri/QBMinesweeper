@@ -20,6 +20,10 @@
   background-position: inherit;
 }
 
+label {
+  color: white;
+}
+
 .button {
   background-color: #1D8495; /* Blue */
   border: none;
@@ -47,6 +51,7 @@
 
 .field {
   margin: auto;
+  background: darkblue;
 }
 
 .settings_table, .header_table {
