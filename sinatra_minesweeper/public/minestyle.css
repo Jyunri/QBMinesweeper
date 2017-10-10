@@ -14,6 +14,10 @@
 
 .body-cont{
   margin-top: 85px;
+  background-image: url(https://goo.gl/zhS2fz);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: inherit;
 }
 
 .button {
