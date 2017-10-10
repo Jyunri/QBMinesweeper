@@ -1,7 +1,7 @@
 {
-	"row_count": 4,
+	"row_count": 2,
 	"col_count": 4,
 	"hidden": null,
-	"clear_count": 12,
-	"field": "Matrix[[{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}], [{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>0, :status=>0, :bombs_count=>\"0\"}, {:type=>0, :status=>0, :bombs_count=>\"0\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}], [{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>1, :status=>0, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}], [{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>1, :status=>0, :bombs_count=>\"1\"}, {:type=>0, :status=>0, :bombs_count=>\"3\"}, {:type=>0, :status=>0, :bombs_count=>\"3\"}, {:type=>0, :status=>0, :bombs_count=>\"2\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}], [{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>0, :status=>0, :bombs_count=>\"2\"}, {:type=>1, :status=>0, :bombs_count=>\"0\"}, {:type=>1, :status=>0, :bombs_count=>\"1\"}, {:type=>0, :status=>0, :bombs_count=>\"1\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}], [{:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}, {:type=>-1, :status=>1, :bombs_count=>\"0\"}]]"
+	"clear_count": 3,
+	"field": "x1,x1,x1,x1,x1,x1,x1,#2,30,30,#0,x1,x1,#0,32,#0,#0,x1,x1,x1,x1,x1,x1,x1,"
 }

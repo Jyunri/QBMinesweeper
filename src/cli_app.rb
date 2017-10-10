@@ -16,13 +16,12 @@ loop do
     g.game_check_cell
   when 'f'
     g.game_set_flag
-    puts printer.print_state(g.board_state)
   when 'x'
     puts printer.print_state(g.board_state(xray: true))
   when 's'
-    IOHandler.save_game(g.board_state)
+    IOHandler.save_game(g.board_state2)
   when 'l'
-    IOHandler.load_game
+    IOHandler.load_game(g, 'savefile.json')
   when 'p'
     if print_style == 1
       printer = PrettyPrinter.new
@@ -33,6 +32,7 @@ loop do
     end
   end
   break if print_mode == 'e' || !g.still_playing?
+  puts printer.print_state(g.board_state)
 end
 
 puts

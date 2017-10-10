@@ -42,10 +42,32 @@ module IOHandler
     end
   end
 
-  def load_game
-    file = File.read('savefile.json')
+  def load_game(game, savefile)
+    file = File.read(savefile)
     board_state = JSON.parse(file)
-    field = board_state['field']
-    a = eval field
+    game.row = board_state['row_count']
+    game.col = board_state['col_count']
+    game.clear_cell_count = board_state['clear_count']
+    game.bombs_count = (game.row * game.col) - game.clear_cell_count
+
+    field = board_state['field'].tr('#', 'b')
+    game.mine_field = load_field(game, field)
+  end
+
+  def load_field(game, field)
+    # bad method to parse board_state. Trying to avoid this eval thing!
+    # a = eval field
+    step = 0
+    type_hash = {
+      x: -1,
+      b: 1
+    }
+    Matrix.build(game.row + 2, game.col + 2) do |r, c|
+      type = type_hash.fetch(field[step].to_sym, 0)
+      status = field[step + 1].to_i
+      bombs_in_neighborhood = field[step].to_i
+      step += 3
+      Cell.new(r, c, type, status, bombs_in_neighborhood)
+    end
   end
 end

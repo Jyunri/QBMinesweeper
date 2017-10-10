@@ -6,11 +6,11 @@ require 'matrix'
 class Cell
   attr_accessor :row, :col, :type, :status, :hasFlag, :bombs_in_neighborhood
 
-  def initialize(row, col, type, status)
+  def initialize(row, col, type, status, bombs_in_neighborhood = 0)
     @row = row
     @col = col
     @type = type
-    @bombs_in_neighborhood = 0
+    @bombs_in_neighborhood = bombs_in_neighborhood
     @status = status
   end
 
@@ -84,6 +84,7 @@ class Cell
     return true if @bombs_in_neighborhood.zero? && clear?
   end
 
+  # return the field's type representation
   def to_s
     if border?
       'x'
