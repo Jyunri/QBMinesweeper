@@ -5,8 +5,6 @@ require './iohandler.rb'
 
 # Representation of a Game
 class Minesweeper
-  include IOHandler
-
   attr_accessor :mine_field, :row, :col, :bombs_count, :clear_cell_count,
                 :flag_count, :game_over
 
@@ -89,8 +87,12 @@ class Minesweeper
     input_col = gets.to_i
 
     # TODO: - raise as exception if invalid row/column
-    @mine_field[input_row, input_col].set_flag
-    @flag_count -= 1
+    if IOHandler.position_input_validation(input_row, input_col, @row, @col)
+      @mine_field[input_row, input_col].flag(self)
+    else
+      puts 'Invalid position!'
+      return false
+    end
   end
 
   def board_state(opt = {})

@@ -40,13 +40,15 @@ class Cell
     end
   end
 
-  def set_flag
+  def flag(game)
     if flagged?
       @status = 0
       puts "Flag unset from position (#{@row},#{@col})"
+      game.flag_count += 1
     elsif unchecked?
       @status = 2
       puts "Flag set on position (#{@row},#{@col})"
+      game.flag_count -= 1
     else
       puts 'Invalid position!'
       false

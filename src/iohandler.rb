@@ -24,7 +24,7 @@ module IOHandler
   end
 
   def position_input_validation(row, col, max_row, max_col)
-    return false if row < 1 || row > max_row || col < 1 || col > max_col
+    row > 0 && row <= max_row && col > 0 && col <= max_col
   end
 
   def new_game_input
