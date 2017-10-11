@@ -9,6 +9,8 @@ class Minesweeper
                 :flag_count, :game_over
 
   def initialize(row, col, bombs_count)
+    init_validation(rows: row, cols: col, bombs: bombs_count)
+
     @row = row
     @col = col
     @bombs_count = bombs_count
@@ -17,6 +19,12 @@ class Minesweeper
     @game_over = false
     @mine_field = generate_field
     set_bombs
+  end
+
+  def init_validation(input = {})
+    raise ArgumentError, 'Row is less than 0' unless input[:rows] > 0
+    raise ArgumentError, 'Column is less than 0' unless input[:cols] > 0
+    raise ArgumentError, 'Bombs is less than 0' unless input[:bombs] > 0
   end
 
   def generate_field
@@ -65,34 +73,27 @@ class Minesweeper
     victory? || @game_over ? false : true
   end
 
-  def game_check_cell
-    puts 'Enter the row where you want check'
-    input_row = gets.to_i
-    puts 'Enter the column where you want to check'
-    input_col = gets.to_i
-
+  def game_check_cell(input_row, input_col)
     # Passing the game class as parameter to handle neighbor cells
-    if IOHandler.position_input_validation(input_row, input_col, @row, @col)
+    if valid_range_validation(input_row, input_col)
       @mine_field[input_row, input_col].check_cell(self)
     else
       puts 'Invalid position!'
-      return false
+      false
     end
   end
 
-  def game_set_flag
-    puts 'Enter the row where you want to set a flag'
-    input_row = gets.to_i
-    puts 'Enter the column where you want to set a flag'
-    input_col = gets.to_i
-
-    # TODO: - raise as exception if invalid row/column
-    if IOHandler.position_input_validation(input_row, input_col, @row, @col)
+  def game_set_flag(input_row, input_col)
+    if valid_range_validation(input_row, input_col)
       @mine_field[input_row, input_col].flag(self)
     else
       puts 'Invalid position!'
-      return false
+      false
     end
+  end
+
+  def valid_range_validation(input_row, input_col)
+    input_row > 0 && input_row <= @row && input_col > 0 && input_col <= @col
   end
 
   def board_state(opt = {})
@@ -101,8 +102,7 @@ class Minesweeper
       cell_status = @mine_field[r, c].status
       cell_bomb_count = @mine_field[r, c].bombs_in_neighborhood.to_s
 
-      { type: cell_type, status: cell_status,
-        bombs_count: cell_bomb_count }
+      { type: cell_type, status: cell_status, bombs_count: cell_bomb_count }
     end
 
     { row_count: @row, col_count: @col, hidden: opt[:xray],

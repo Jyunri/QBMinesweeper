@@ -15,13 +15,15 @@ class Cell
   end
 
   def check_cell(game)
-    if bomb?
-      game.game_over = true
-    elsif unchecked?
-      @status = 1
-      game.clear_cell_count -= 1
-      expand_neighborhood(game) if bombs_in_neighborhood.zero?
-      puts "Nice! There's still #{game.clear_cell_count} clear cells left!"
+    if unchecked?
+      if bomb?
+        game.game_over = true
+      else
+        @status = 1
+        game.clear_cell_count -= 1
+        expand_neighborhood(game) if bombs_in_neighborhood.zero?
+        puts "Nice! There's still #{game.clear_cell_count} clear cells left!"
+      end
     else
       puts 'Invalid position!'
     end

@@ -35,9 +35,25 @@ module IOHandler
     puts 'Enter with number of bombs'
     input_bombs = gets.to_i
 
-    input_validation(rows: input_rows, cols: input_columns, bombs: input_bombs)
-
     Minesweeper.new(input_rows, input_columns, input_bombs)
+  end
+
+  def check_input(game)
+    puts 'Enter the row where you want check'
+    input_row = gets.to_i
+    puts 'Enter the column where you want to check'
+    input_col = gets.to_i
+
+    game.game_check_cell(input_row, input_col)
+  end
+
+  def flag_input(game)
+    puts 'Enter the row where you want to set a flag'
+    input_row = gets.to_i
+    puts 'Enter the column where you want to set a flag'
+    input_col = gets.to_i
+
+    game.game_set_flag(input_row, input_col)
   end
 
   def save_game(board_state)

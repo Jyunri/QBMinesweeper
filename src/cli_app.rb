@@ -13,9 +13,9 @@ loop do
   puts print_mode = gets.chomp
   case print_mode
   when 'c'
-    g.game_check_cell
+    IOHandler.check_input(g)
   when 'f'
-    g.game_set_flag
+    IOHandler.flag_input(g)
   when 'x'
     puts printer.print_state(g.board_state(xray: true))
   when 's'
