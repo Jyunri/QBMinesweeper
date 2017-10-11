@@ -5,7 +5,14 @@ A documentação a seguir tem o propósito maior de ser um log de desenvolviment
 
 ## Quick Usage
 
-Para um rápido uso sem muita conversa da Game Engine, abra a pasta /src e rode o cli_app.rb ou o email_usage.rb com o comando
+Para um rápido uso sem muita conversa da Game Engine, instale as seguintes gems:
+
+* colorize
+* sinatra
+* sinatra-flash
+* pry
+
+Abra a pasta /src e rode o cli_app.rb ou o email_usage.rb com o comando
 
 ```ruby cli_app.rb``` ou ```ruby email_usage.rb```
 
@@ -13,7 +20,7 @@ Como alternativa, você pode rodar a versão com interface gráfica na pasta /si
 
 ```ruby app.rb```
 
-e abrindo o navegador em localhost:4567
+e abrindo o navegador em localhost:4567. Use o botão esquerdo para descobrir uma célula e o botão direito para colocar/remover flag
 
 
 ## A Game Engine
