@@ -57,7 +57,6 @@ class Cell
     end
   end
 
-  # TODO: try to convert this in something like #define BORDER -1
   # type conventions
   def border?
     return true if @type == -1
